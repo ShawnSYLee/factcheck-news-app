@@ -13,13 +13,17 @@ const useNews = () => {
             category: 'politics',
             language: 'en',
             country: 'us'
-          }).then(response => {
+        }).then(response => {
             setState(state => ({
                 ...state,
                 articles: response.articles,
                 totalResults: response.totalResults
             }))
-          });
+        });
+    }
+
+    function getSearchHeadlines() {
+
     }
 
     return {
