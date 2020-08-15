@@ -1,13 +1,20 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ArticleListItem = ({author, title, source, url}) => {
+import { 
+    Card,
+    Input 
+} from 'antd';
+
+const ArticleListItem = ({article}) => {
     return (
-        <div>
-            <div className="article-title">{title}</div>
-            <div className="article-title">{author}</div>
-            <div className="article-title">{source.name}</div>
-        </div>
+        <Card 
+            title={article.title}
+            cover={<img src={article.urlToImage} />}
+        >
+            <p>{article.author}</p>
+            <p>{article.source.name}</p>
+        </Card> 
     );
 }
 
