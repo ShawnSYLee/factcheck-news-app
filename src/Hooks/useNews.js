@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-
 import { NewsContext } from "../Contexts/NewsContext"
 
 const useNews = () => {
@@ -27,11 +26,24 @@ const useNews = () => {
     }
 
     function getSearchHeadlines() {
-
+        newsapi.v2.everything({
+            q: 'Ariana Grande',
+            from: '2017-01-01',
+            language: 'en',
+            sortBy: 'relevancy',
+            pageSize: '40'
+        }).then(response => {
+            setState(state => ({
+                ...state,
+                articles: response.articles,
+                totalResults: response.totalResults
+            }))
+        });
     }
 
     return {
         getTopHeadlines,
+        getSearchHeadlines
     }
 };
 
