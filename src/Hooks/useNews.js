@@ -10,7 +10,6 @@ const useNews = () => {
 
     function getTopHeadlines() {
         newsapi.v2.topHeadlines({
-            q: 'trump',
             category: 'politics',
             language: 'en',
             country: 'us'

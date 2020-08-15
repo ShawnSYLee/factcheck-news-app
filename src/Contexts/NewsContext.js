@@ -6,9 +6,17 @@ const NewsProvider = (props) => {
     const [news, setNews] = useState({
         articles: [
             {
-                author: "derp",
-                title: "derpy",
-                source: "asdfasdlf"
+                author: "Author",
+                content: "Content",
+                description: "",
+                publishedAt: "Published",
+                source: {
+                    id: "source-id",
+                    name: "source-name"
+                },
+                title: "Title",
+                url: "url",
+                urlToImage: "urlToImage"
             }
         ],
         totalResults: 0
