@@ -6,22 +6,41 @@ import {
     Input 
 } from 'antd';
 
+import useNews from "../Hooks/useNews"
+
+import ArticleListItem from '../Components/ArticleListItem'
+
 import '../Styles/App.css';
 
 const { Search } = Input;
 
 const MainView = () => {
     let history = useHistory();
+    const NewsAPI = require('newsapi');
+    // const newsapi = new NewsAPI('1c2c9496522c45818207e592c841a459')
+    const newsapi = new NewsAPI('1c2c9496522c45818207e592c841a459', { corsProxyUrl: 'https://cors-anywhere.herokuapp.com/' });
 
     function goToArticle() {
-        history.push('/article=0')
+        newsapi.v2.topHeadlines({
+            q: 'trump',
+            category: 'politics',
+            language: 'en',
+            country: 'us'
+          }).then(response => {
+            console.log(response);
+            /*
+              {
+                status: "ok",
+                articles: [...]
+              }
+            */
+          });
     }
+
+   
 
     return (
         <>
-            <div>
-                <span>Main View</span>
-            </div>
             <Search 
                 placeholder="Search news"
                 enterButton="Search"
@@ -30,6 +49,10 @@ const MainView = () => {
             />
 
             <Button type="primary" onClick={goToArticle}>Go to Article</Button>
+
+            <div className="article-list">
+                {/* map and display ArticleListItems */}
+            </div>
         </>
     )
 }
