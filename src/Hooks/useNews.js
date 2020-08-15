@@ -8,6 +8,10 @@ const useNews = () => {
 
     const [state, setState] = useContext(NewsContext);
 
+    useEffect(() => {
+        getTopHeadlines();
+    }, []);
+
     function getTopHeadlines() {
         newsapi.v2.topHeadlines({
             category: 'politics',
