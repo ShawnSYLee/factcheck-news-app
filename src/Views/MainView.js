@@ -35,16 +35,12 @@ const MainView = () => {
                 onSearch={testCallbacks}
             />
 
-            <Button type="primary" onClick={getTopHeadlines}>Go to Article</Button>
-
             <div className="article-list">
                 {state.articles.map((article, i) =>
                     <ArticleListItem
                         key={i}
                         i={i}
-                        author={state.articles[i].author}
-                        title={state.articles[i].title}
-                        source={state.articles[i].source}
+                        article={article}
                     />
                 )}
             </div>
