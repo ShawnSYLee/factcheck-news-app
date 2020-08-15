@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { 
@@ -7,7 +7,7 @@ import {
 } from 'antd';
 
 import useNews from "../Hooks/useNews"
-
+import { NewsContext } from "../Contexts/NewsContext"
 import ArticleListItem from '../Components/ArticleListItem'
 
 import '../Styles/App.css';
@@ -16,28 +16,15 @@ const { Search } = Input;
 
 const MainView = () => {
     let history = useHistory();
-    const NewsAPI = require('newsapi');
-    // const newsapi = new NewsAPI('1c2c9496522c45818207e592c841a459')
-    const newsapi = new NewsAPI('1c2c9496522c45818207e592c841a459', { corsProxyUrl: 'https://cors-anywhere.herokuapp.com/' });
+    const [state, setState] = useContext(NewsContext);
+    const { 
+        getTopHeadlines
+     } = useNews();
 
-    function goToArticle() {
-        newsapi.v2.topHeadlines({
-            q: 'trump',
-            category: 'politics',
-            language: 'en',
-            country: 'us'
-          }).then(response => {
-            console.log(response);
-            /*
-              {
-                status: "ok",
-                articles: [...]
-              }
-            */
-          });
+    function testCallbacks() {
+        console.log(state.articles)
+        console.log(state.totalResults)
     }
-
-   
 
     return (
         <>
@@ -45,13 +32,21 @@ const MainView = () => {
                 placeholder="Search news"
                 enterButton="Search"
                 size="large"
-                 onSearch={value => console.log(value)}
+                onSearch={testCallbacks}
             />
 
-            <Button type="primary" onClick={goToArticle}>Go to Article</Button>
+            <Button type="primary" onClick={getTopHeadlines}>Go to Article</Button>
 
             <div className="article-list">
-                {/* map and display ArticleListItems */}
+                {state.articles.map((article, i) =>
+                    <ArticleListItem
+                        key={i}
+                        i={i}
+                        author={state.articles[i].author}
+                        title={state.articles[i].title}
+                        source={state.articles[i].source}
+                    />
+                )}
             </div>
         </>
     )

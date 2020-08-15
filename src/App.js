@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
+import { NewsProvider } from "./Contexts/NewsContext";
+
 import Main from "./Main";
 
 import './Styles/App.css';
@@ -8,9 +10,12 @@ import './Styles/App.css';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Main />
-      </BrowserRouter>
+      <NewsProvider>
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>
+      </NewsProvider>
+      
     </div>
   );
 }
