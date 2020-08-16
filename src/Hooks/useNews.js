@@ -3,7 +3,7 @@ import { NewsContext } from "../Contexts/NewsContext"
 
 const useNews = () => {
     const NewsAPI = require('newsapi');
-    const newsapi = new NewsAPI('1c2c9496522c45818207e592c841a459', { corsProxyUrl: 'https://cors-anywhere.herokuapp.com/' });
+    const newsapi = new NewsAPI('19a7dfed5fca41c486a3b5a5744ce031', { corsProxyUrl: 'https://cors-anywhere.herokuapp.com/' });
 
     const [state, setState] = useContext(NewsContext);
 
@@ -17,11 +17,10 @@ const useNews = () => {
             language: 'en',
             country: 'us'
         }).then(response => {
-            setState(state => ({
-                ...state,
+            setState({
                 articles: response.articles,
                 totalResults: response.totalResults
-            }))
+            })
         });
     }
 
@@ -31,11 +30,10 @@ const useNews = () => {
             language: 'en',
             sortBy: 'relevancy'
         }).then(response => {
-            setState(state => ({
-                ...state,
+            setState({
                 articles: response.articles,
                 totalResults: response.totalResults
-            }))
+            })
         });
     }
 

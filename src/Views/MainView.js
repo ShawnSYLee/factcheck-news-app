@@ -17,9 +17,6 @@ const { Search } = Input;
 const MainView = () => {
     let history = useHistory();
     const [state, setState] = useContext(NewsContext);
-    const {
-        getTopHeadlines
-    } = useNews();
     const { getSearchHeadlines } = useNews();
 
     function testCallbacks() {
