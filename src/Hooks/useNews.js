@@ -27,11 +27,9 @@ const useNews = () => {
 
     function getSearchHeadlines() {
         newsapi.v2.everything({
-            q: 'Ariana Grande',
-            from: '2017-01-01',
+            q: 'Donald Trump',
             language: 'en',
-            sortBy: 'relevancy',
-            pageSize: '40'
+            sortBy: 'relevancy'
         }).then(response => {
             setState(state => ({
                 ...state,

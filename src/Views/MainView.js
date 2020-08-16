@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { 
+import {
     Button,
-    Input 
+    Input
 } from 'antd';
 
 import useNews from "../Hooks/useNews"
@@ -17,9 +17,10 @@ const { Search } = Input;
 const MainView = () => {
     let history = useHistory();
     const [state, setState] = useContext(NewsContext);
-    const { 
+    const {
         getTopHeadlines
-     } = useNews();
+    } = useNews();
+    const { getSearchHeadlines } = useNews();
 
     function testCallbacks() {
         console.log(state.articles)
@@ -28,11 +29,11 @@ const MainView = () => {
 
     return (
         <>
-            <Search 
+            <Search
                 placeholder="Search news"
                 enterButton="Search"
                 size="large"
-                onSearch={testCallbacks}
+                onSearch={getSearchHeadlines()}
             />
 
             <div className="article-list">
